@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+void main() => runApp(ShopScreen());
+
 class ShopScreen extends StatefulWidget {
   const ShopScreen({Key? key}) : super(key: key);
 
@@ -12,12 +14,15 @@ class _ShopScreenState extends State<ShopScreen>
     with SingleTickerProviderStateMixin {
 
   TabController? _tabController;
+  PageController? _pageController;
+  int _selectedPage = 0;
   
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _tabController = TabController(initialIndex: 0, length: 5, vsync: this);
+    _pageController = PageController(initialPage: 0, viewportFraction: 0.8);
   }
 
   @override
@@ -73,7 +78,52 @@ class _ShopScreenState extends State<ShopScreen>
               tabs: [
                 Tab(
                   child: Text(
-                    'Top',
+                    'Principal',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Tab(
+                  child: Text(
+                    'Exterior',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Tab(
+                  child: Text(
+                    'Interior',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Tab(
+                  child: Text(
+                    'Chegou agora',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Tab(
+                  child: Text(
+                    'New Arrivals',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Tab(
+                  child: Text(
+                    'Edição limitada',
                     style: TextStyle(
                       fontSize: 16.0,
                       fontWeight: FontWeight.bold,
@@ -81,7 +131,24 @@ class _ShopScreenState extends State<ShopScreen>
                   ),
                 )
               ],
-            )
+            ),
+            SizedBox(height: 20.0,),
+            Container(
+              height: 500.0,
+              width: double.infinity,
+              child: PageView.builder(
+                controller: _pageController,
+                onPageChanged: (int index) {
+                  setState(() {
+                    _selectedPage = index;
+                  });
+                },
+                itemCount: plants.length,
+                itemBuilder: (BuildContext, int index) {
+                  return Text('$index');
+                },
+              ),
+            ),
           ],
         ),
       ),
