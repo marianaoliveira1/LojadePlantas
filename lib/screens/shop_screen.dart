@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:planta/models/plant.dart';
 
 class ShopScreen extends StatefulWidget {
   const ShopScreen({Key? key}) : super(key: key);
@@ -14,6 +15,37 @@ class _ShopScreenState extends State<ShopScreen>
   TabController? _tabController;
   PageController? _pageController;
   int _selectedPage = 0;
+
+  _plantSelector(int index){
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Container(
+          decoration:  BoxDecoration(
+            color: Color(0xFF32A060),
+            borderRadius: BorderRadius.circular(15.0),
+          ),
+          margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 30.0),
+          child: Stack(children: [
+            Center(
+              child: Hero(
+                tag: plants[index].imageUrl,
+                child: Image(
+                  height: 280.0,
+                  width: 280.0,
+                  image: AssetImage(
+                    'assets/images/plant$index.png',
+                  ),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ],),
+        ),
+      ],
+    );
+  }
+
 
   @override
   void initState() {
@@ -110,15 +142,15 @@ class _ShopScreenState extends State<ShopScreen>
                     ),
                   ),
                 ),
-                Tab(
-                  child: Text(
-                    'New Arrivals',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
+                // Tab(
+                //   child: Text(
+                //     'New Arrivals',
+                //     style: TextStyle(
+                //       fontSize: 16.0,
+                //       fontWeight: FontWeight.bold,
+                //     ),
+                //   ),
+                // ),
                 Tab(
                   child: Text(
                     'Edição limitada',
@@ -143,7 +175,7 @@ class _ShopScreenState extends State<ShopScreen>
                 },
                 itemCount: plants.length,
                 itemBuilder: (BuildContext, int index) {
-                  return Text('$index');
+                  return _plantSelector(index);
                 },
               ),
             ),
