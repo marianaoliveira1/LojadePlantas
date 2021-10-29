@@ -20,11 +20,11 @@ final List<Plant> plants = [
   Plant(
     imageUrl: 'assets/images/plant0.png',
     name: 'Aloe Vera',
-    category: 'Outdoor',
+    category: 'Exterior',
     price: 25,
     size: 'Small',
     description:
-    'Aloe vera is a succulent plant species of the genus Aloe. It\'s medicinal uses and air purifying ability make it an awesome plant.',
+    'Aloe vera é uma espécie de planta suculenta do gênero Aloe. Seus usos medicinais e capacidade de purificação do ar a tornam uma planta incrível.',
   ),
   Plant(
     imageUrl: 'assets/images/plant1.png',
@@ -33,7 +33,7 @@ final List<Plant> plants = [
     price: 30,
     size: 'Medium',
     description:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porta risus id urna luctus efficitur.',
+    'c',
   ),
   Plant(
     imageUrl: 'assets/images/plant2.png',

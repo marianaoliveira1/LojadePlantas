@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:planta/models/plant.dart';
 
 class ShopScreen extends StatefulWidget {
-  const ShopScreen({Key? key}) : super(key: key);
 
   @override
   _ShopScreenState createState() => _ShopScreenState();
@@ -13,36 +12,118 @@ class _ShopScreenState extends State<ShopScreen>
     with SingleTickerProviderStateMixin {
 
   TabController? _tabController;
-  PageController? _pageController;
+  late PageController _pageController;
   int _selectedPage = 0;
 
   _plantSelector(int index){
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Container(
-          decoration:  BoxDecoration(
-            color: Color(0xFF32A060),
-            borderRadius: BorderRadius.circular(15.0),
+    return AnimatedBuilder(
+      animation: _pageController,
+      builder: (BuildContext context, Widget? widget) {
+        double value = 1;
+        if(_pageController!.position.haveDimensions) {
+          value = (_pageController!.page! - index);
+          value = (1 - (value.abs() * 0.3)).clamp(0.0, 1.0);
+        }
+
+        return Center (
+          child:  SizedBox(
+            height: Curves.easeInOut.transform(value) * 500.0,
+            width:  Curves.easeInOut.transform(value) * 400.0,
+            child: widget,
           ),
-          margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 30.0),
-          child: Stack(children: [
-            Center(
-              child: Hero(
-                tag: plants[index].imageUrl,
-                child: Image(
-                  height: 280.0,
-                  width: 280.0,
-                  image: AssetImage(
-                    'assets/images/plant$index.png',
+        );
+      },
+
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Container(
+            decoration:  BoxDecoration(
+              color: Color(0xFF32A060),
+              borderRadius: BorderRadius.circular(15.0),
+            ),
+            margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 30.0),
+            child: Stack(children: [
+              Center(
+                child: Hero(
+                  tag: plants[index].imageUrl,
+                  child: Image(
+                    height: 280.0,
+                    width: 280.0,
+                    image: AssetImage(
+                      'assets/images/plant$index.png',
+                    ),
+                    fit: BoxFit.cover,
                   ),
-                  fit: BoxFit.cover,
                 ),
               ),
+              Positioned(
+                top: 30.0,
+                right: 30.0,
+                child: Column(crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    'De',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15.0
+                    ),
+                  ),
+                  Text(
+                    '\$${plants[index].price}',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 15.0,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+                ),
+              ),
+              Positioned(
+                left: 30.0,
+                bottom: 40.0,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      plants[index].category.toUpperCase(),
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 15.0
+                      ),
+                    ),
+                    SizedBox(height: 5.0,),
+                    Text(
+                      plants[index].name,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 25.0,
+                        fontWeight: FontWeight.w600
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ],),
+          ),
+          Positioned(
+            bottom: 4.0,
+            child: RawMaterialButton(
+              padding: EdgeInsets.all(15.0),
+              shape: CircleBorder(),
+              elevation: 2.0,
+              fillColor: Colors.black,
+              child: Icon(
+                Icons.add_shopping_cart,
+                color: Colors.white,
+                size: 30.0,
+              ),
+              onPressed: () => print('Add ao carrinho'),
             ),
-          ],),
-        ),
-      ],
+          )
+        ],
+      ),
     );
   }
 
@@ -177,6 +258,29 @@ class _ShopScreenState extends State<ShopScreen>
                 itemBuilder: (BuildContext, int index) {
                   return _plantSelector(index);
                 },
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(30.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Descrição',
+                    style: TextStyle(
+                      fontSize: 22.0,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  SizedBox(height: 10.0,),
+                  Text(
+                    plants[_selectedPage].description,
+                    style: TextStyle(
+                      color: Colors.black87,
+                      fontSize: 16.0,
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
