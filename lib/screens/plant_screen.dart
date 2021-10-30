@@ -90,7 +90,7 @@ class _PlantScreenState extends State<PlantScreen> {
                       ),
                       SizedBox(height: 40.0,),
                       Text(
-                        'Sizw',
+                        'Tamanho',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 15.0,
@@ -155,7 +155,7 @@ class _PlantScreenState extends State<PlantScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'All to know',
+                            'Para saber mais',
                             style: TextStyle(
                               fontSize: 24.0,
                               fontWeight: FontWeight.w600,
@@ -164,7 +164,43 @@ class _PlantScreenState extends State<PlantScreen> {
                           SizedBox(height: 10.0,),
                           Text(
                             widget.plant.description,
+                            style: TextStyle(
+                              color: Colors.black87,
+                              fontSize: 16.0,
+                            ),
                           )
+                        ],
+                      ),
+                    ),
+                    Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 30.0,
+                          vertical: 40.0,
+                        ),
+                      child: Column(
+                        children: [
+                          Text(
+                            'Detalhes',
+                            style: TextStyle(
+                              fontSize: 24.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          SizedBox(height: 10.0,),
+                          Text(
+                            'Tamanho: 35-45cm',
+                            style: TextStyle(
+                              fontSize: 15.0,
+                              color: Colors.black87,
+                            ),
+                          ),
+                          Text(
+                            'Largura do pote do berçário: 12 cm',
+                            style: TextStyle(
+                              fontSize: 15.0,
+                              color: Colors.black87,
+                            ),
+                          ),
                         ],
                       ),
                     ),

@@ -22,25 +22,25 @@ final List<Plant> plants = [
     name: 'Aloe Vera',
     category: 'Exterior',
     price: 25,
-    size: 'Small',
+    size: 'Pequena',
     description:
     'Aloe vera é uma espécie de planta suculenta do gênero Aloe. Seus usos medicinais e capacidade de purificação do ar a tornam uma planta incrível.',
   ),
   Plant(
     imageUrl: 'assets/images/plant1.png',
     name: 'Cool Plant',
-    category: 'Indoor',
+    category: 'Interior',
     price: 30,
-    size: 'Medium',
+    size: 'Médio',
     description:
     'c',
   ),
   Plant(
     imageUrl: 'assets/images/plant2.png',
     name: 'Really Cool Plant',
-    category: 'New Arrival',
+    category: 'Nova',
     price: 42,
-    size: 'Large',
+    size: 'Grande',
     description:
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porta risus id urna luctus efficitur. Suspendisse vulputate faucibus est, a vehicula sem eleifend quis.',
   ),
